@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+ head
+   title Calculator
+ body
+   if !result 
+    - result = 0
+   if !value1
+    - value1 = 0
+   if !value2
+    - value2 = 0
+   if !operand
+    - operand = 'add'
+   h1 Calculator
+   h2
+    p 
+      |  display: 
+      input(name='display', value=`${result}`, type='string')
+    form(role='form' action='/', method='POST')
+      p
+      | value 1: 
+      input(name='a', value=`${value1}`, type='number')
+      |          operand: 
+      input(name='b', value=`${operand}`, type='text')
+      |          value 2: 
+      input(name='c', value=`${value2}`, type='number')
+      |          submit: 
+      input(type='submit', name='equals', value=' = ')
