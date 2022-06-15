@@ -6,12 +6,10 @@ Feature: Calculator operations
     Given the numbers 12 and 6
 
   Example: Add two numbers
-    Given the numbers 12 and 6 
     When they are added together 
     Then should the result be 18
 
   Example: Subtract two numbers
-    Given the numbers 12 and 6
     When the latter is subtracted from the former
     Then should the result be 6
 
