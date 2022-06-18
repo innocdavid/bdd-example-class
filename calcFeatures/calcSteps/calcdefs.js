@@ -1,15 +1,23 @@
 const assert = require('assert');
-const { Given, When, Then, setDefaultTimeout } = require('@cucumber/cucumber');
+const { Given, When, Then, setDefaultTimeout, Before, After } = require('@cucumber/cucumber');
 const Calculator = require('../../lib/calculator');
 const { Builder, By, Key } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
 const webdriver = require('selenium-webdriver');
-
-
-const service = new chrome.ServiceBuilder('./chromedriver');
-const driver = new Builder().forBrowser('chrome').setChromeService(service).build();
+let driver;
 
 setDefaultTimeout (60000)
+
+// Hooks
+Before(function () {
+  const chrome = require('selenium-webdriver/chrome');
+  const service = new chrome.ServiceBuilder('./chromedriver');
+  const options = new chrome.Options();
+  options.headless();
+  driver = new Builder().forBrowser('chrome').setChromeService(service).setChromeOptions(options).build();
+});
+After(function () {
+  driver.quit();
+});
 
 Given('the numbers {int} and {int}', function (x, y) {
   calculator = new Calculator(x, y);
@@ -58,4 +66,5 @@ When('I submit', async () => {
 Then('the display should show {int}', async (answer) => {
   let result = await driver.findElement(By.name('display')).getAttribute('value')
   assert.equal(result, answer)
+  //console.log(result)
 });

@@ -9,3 +9,19 @@ Feature: gui
   And my operand is "add"
   When I submit 
   Then the display should show 18
+  
+  Example: subtraction
+  And my operand is "sub"
+  When I submit 
+  Then the display should show 6
+
+  Example: multiplication
+  And my operand is "mul"
+  When I submit 
+  Then the display should show 72
+
+  Example: division
+  And my operand is "div"
+  When I submit 
+  Then the display should show 2
+
